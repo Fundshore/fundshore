@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundshore — Your Safe Harbor in Finance</title>
+<meta name="description" content="Free Financial X-Ray: see your health score, find hidden waste, and get a personalized plan in 2 minutes. No signup required.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2300D4AA'/%3E%3Cpath d='M8 5L8 27' fill='none' stroke='%23182A42' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M8 5L24 5' fill='none' stroke='%23182A42' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M8 22C11 22 12 14 15 17C18 20 18 10 23 10' fill='none' stroke='%236C5CE7' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='23' cy='10' r='2' fill='%236C5CE7'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#182A42;--bg-card:#132236;--bg-deep:#0F1C2E;
+--teal:#00D4AA;--teal-dim:#009E86;--violet:#6C5CE7;--violet-dim:#5A4BD6;
+--coral:#FF6B8A;--coral-bg:rgba(255,107,138,.1);
+--text:#E4ECF4;--text-mid:#8BA8C0;--text-muted:#5A7A9A;--text-dim:#3A5A78;
+--border:#1E3A56;--border-light:#254668;
+--font:'DM Sans',system-ui,sans-serif;--serif:'Instrument Serif',Georgia,serif;--mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+a{color:var(--teal);text-decoration:none}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(19,34,54,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(30,58,86,.4);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo svg{width:36px;height:36px}
+.nav-logo span{font-size:1.15rem;font-weight:500;letter-spacing:.5px}
+.nav-logo .teal{color:var(--teal)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{color:var(--text-muted);font-size:.9rem;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.btn-primary{color:var(--bg)}
+.nav-links a.btn-primary:hover{color:var(--bg)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.65rem 1.5rem;border-radius:99px;font-weight:500;font-size:.9rem;border:none;cursor:pointer;transition:all .25s}
+.btn-primary{background:var(--teal);color:var(--bg)}
+.btn-primary:hover{background:#00E8BB;transform:translateY(-1px)}
+.btn-secondary{background:var(--violet);color:#fff}
+.btn-secondary:hover{background:#7D6FF0;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--teal);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--teal);background:rgba(0,212,170,.06)}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(0,212,170,.06) 0%,rgba(108,92,231,.04) 40%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border-radius:99px;border:1px solid var(--border);color:var(--text-muted);font-size:.8rem;margin-bottom:2rem;background:var(--bg-card)}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-family:var(--serif);font-size:clamp(2.4rem,6vw,4rem);font-weight:400;line-height:1.15;margin-bottom:1.2rem;max-width:700px}
+.hero h1 em{font-style:italic;color:var(--teal)}
+.hero p{font-size:1.1rem;color:var(--text-mid);max-width:520px;margin-bottom:2.5rem;line-height:1.7}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.hero-sub{margin-top:1.5rem;font-size:.82rem;color:var(--text-dim)}
+
+/* ===== SECTION COMMON ===== */
+section{padding:5rem 2rem}
+.container{max-width:960px;margin:0 auto}
+.section-label{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:.75rem}
+.section-title{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:400;line-height:1.2;margin-bottom:1rem}
+.section-sub{color:var(--text-mid);max-width:560px;font-size:1rem;line-height:1.7}
+
+/* ===== FINANCIAL X-RAY ===== */
+#xray{background:var(--bg-deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.xray-container{max-width:680px;margin:0 auto}
+.xray-progress{display:flex;gap:4px;margin-bottom:2.5rem}
+.xray-progress .step-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+.xray-progress .bar{width:100%;height:4px;border-radius:2px;background:var(--bg-card);transition:background .4s}
+.xray-progress .bar.active{background:var(--teal)}
+.xray-progress .bar.done{background:var(--violet)}
+.xray-progress .step-label{font-size:.68rem;color:var(--text-dim);letter-spacing:.5px;transition:color .4s;white-space:nowrap}
+.xray-progress .step-col.active .step-label{color:var(--teal)}
+.xray-progress .step-col.done .step-label{color:var(--violet)}
+
+.xray-step{display:none;animation:fadeUp .4s ease}
+.xray-step.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.xray-step h3{font-size:1.3rem;font-weight:500;margin-bottom:.4rem}
+.xray-step .step-desc{color:var(--text-muted);font-size:.92rem;margin-bottom:2rem}
+
+.input-group{margin-bottom:1.5rem}
+.input-group label{display:block;font-size:.85rem;color:var(--text-mid);margin-bottom:.4rem;font-weight:500}
+.input-group .hint{font-size:.78rem;color:var(--text-dim);margin-top:.3rem}
+.input-row{display:flex;gap:.75rem;align-items:center}
+.currency-input{position:relative;flex:1}
+.currency-input::before{content:'$';position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-family:var(--mono);font-size:1rem;pointer-events:none;z-index:1}
+.currency-input input{padding-left:34px}
+input[type="number"],input[type="text"]{width:100%;padding:.75rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--mono);font-size:1rem;outline:none;transition:border-color .2s}
+.currency-input input[type="number"]{padding-left:34px}
+input:focus{border-color:var(--teal)}
+input::placeholder{color:var(--text-dim)}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none}
+input[type=number]{-moz-appearance:textfield}
+
+.expense-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.expense-item{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1rem;transition:border-color .2s}
+.expense-item:focus-within{border-color:var(--violet)}
+.expense-item .exp-icon{font-size:1.1rem;margin-bottom:.3rem}
+.expense-item .exp-label{font-size:.8rem;color:var(--text-muted);margin-bottom:.5rem}
+.expense-item input{border:none;background:transparent;padding:0;padding-left:20px;font-size:1.2rem;font-family:var(--mono);color:var(--teal);width:100%}
+.expense-item .currency-input::before{left:0;font-size:1.1rem}
+.expense-item input:focus{outline:none}
+.expense-item input::placeholder{color:var(--text-dim);font-size:.9rem}
+
+.debt-row{display:grid;grid-template-columns:2fr 1.2fr .8fr;gap:.75rem;align-items:end;margin-bottom:.75rem;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1rem 1rem .75rem;position:relative}
+.debt-row input{font-size:.9rem}
+.debt-remove{position:absolute;top:8px;right:8px;background:rgba(255,107,138,.1);border:1px solid rgba(255,107,138,.2);border-radius:8px;color:var(--coral);cursor:pointer;font-size:.75rem;padding:4px 10px;font-family:var(--font);transition:all .2s}
+.debt-remove:hover{background:rgba(255,107,138,.2);border-color:var(--coral)}
+.apr-label{display:flex;align-items:center;gap:4px}
+.apr-tip{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1px solid var(--border);color:var(--text-dim);font-size:.6rem;cursor:help;position:relative;flex-shrink:0}
+.apr-tip:hover::after{content:'Annual Percentage Rate — the yearly interest your lender charges on this debt';position:absolute;bottom:calc(100% + 6px);left:0;width:220px;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:.72rem;color:var(--text-mid);line-height:1.4;z-index:10;pointer-events:none;white-space:normal;text-align:left}
+.add-debt{display:inline-flex;align-items:center;gap:.4rem;color:var(--violet);font-size:.85rem;cursor:pointer;padding:.5rem 0;border:none;background:none;font-family:var(--font)}
+.add-debt:hover{color:#9B8FFF}
+.remove-debt{display:none}
+
+.xray-nav{display:flex;justify-content:space-between;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+
+/* ===== RESULTS DASHBOARD ===== */
+.results-grid{display:grid;gap:1.5rem}
+.score-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:center}
+.score-ring{position:relative;width:180px;height:180px;margin:0 auto 1rem}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring .track{fill:none;stroke:var(--border);stroke-width:10}
+.score-ring .fill{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1.5s ease}
+.score-value{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.score-value .num{font-family:var(--mono);font-size:3rem;font-weight:500;line-height:1}
+.score-value .label{font-size:.8rem;color:var(--text-muted)}
+
+.metrics-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.metric-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.metric-card .mc-label{font-size:.78rem;color:var(--text-muted);margin-bottom:.3rem}
+.metric-card .mc-value{font-family:var(--mono);font-size:1.5rem;font-weight:500}
+.metric-card .mc-sub{font-size:.75rem;color:var(--text-dim);margin-top:.2rem}
+.mc-teal{color:var(--teal)}
+.mc-coral{color:var(--coral)}
+.mc-violet{color:var(--violet)}
+
+.chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem}
+.chart-card h4{font-size:.95rem;font-weight:500;margin-bottom:1rem}
+.chart-canvas{width:100%;height:240px;position:relative}
+
+.donut-wrap{display:flex;gap:2rem;align-items:center}
+.donut-svg{flex-shrink:0}
+.donut-legend{flex:1}
+.donut-legend .leg-item{display:flex;align-items:center;padding:.4rem 0;border-bottom:1px solid rgba(30,58,86,.3);gap:.5rem}
+.donut-legend .leg-item:last-child{border:none}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.leg-name{font-size:.82rem;color:var(--text-mid);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.leg-val{font-family:var(--mono);font-size:.82rem;color:var(--text);flex-shrink:0;min-width:60px;text-align:right}
+.leg-pct{font-family:var(--mono);font-size:.78rem;color:var(--text-dim);flex-shrink:0;min-width:36px;text-align:right}
+
+.rec-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem}
+.rec-card h4{font-size:.95rem;font-weight:500;margin-bottom:1rem}
+.rec-item{padding:.75rem 0;border-bottom:1px solid rgba(30,58,86,.3)}
+.rec-item:last-child{border:none}
+.rec-item .rec-title{font-size:.9rem;font-weight:500;margin-bottom:.2rem}
+.rec-item .rec-desc{font-size:.82rem;color:var(--text-muted);line-height:1.5}
+.rec-item .rec-save{font-family:var(--mono);font-size:.85rem;color:var(--teal);margin-top:.3rem}
+
+.results-cta{text-align:center;margin-top:2rem;padding:2rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px}
+.results-cta h4{font-size:1.1rem;margin-bottom:.4rem}
+.results-cta p{color:var(--text-muted);font-size:.88rem;margin-bottom:1.2rem}
+.results-cta .email-form{display:flex;gap:.5rem;max-width:400px;margin:0 auto}
+.results-cta input[type="text"]{flex:1;font-family:var(--font)}
+.ai-card{background:var(--bg-card);border:1px solid var(--violet);border-radius:14px;padding:1.5rem;position:relative;overflow:hidden}
+.ai-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--violet))}
+.ai-card h4{display:flex;align-items:center;gap:.5rem;font-size:.95rem;font-weight:500;margin-bottom:1rem;color:var(--violet)}
+.ai-card h4 svg{flex-shrink:0}
+.ai-text{font-size:.9rem;color:var(--text-mid);line-height:1.7}
+.ai-loading{display:flex;align-items:center;gap:.75rem;padding:1rem 0;color:var(--text-muted);font-size:.88rem}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--violet);animation:aipulse 1.2s ease infinite}
+.ai-dot:nth-child(2){animation-delay:.2s}
+.ai-dot:nth-child(3){animation-delay:.4s}
+@keyframes aipulse{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+.ai-error{color:var(--coral);font-size:.85rem}
+
+.share-card{background:linear-gradient(135deg,#0F1C2E 0%,#162640 50%,#1A3050 100%);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;overflow:hidden}
+.share-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:rgba(0,212,170,.06);border-radius:50%}
+.share-card::after{content:'';position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;background:rgba(108,92,231,.05);border-radius:50%}
+.share-card-inner{position:relative;z-index:1}
+.share-card-header{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem}
+.share-card-header svg{width:28px;height:28px}
+.share-card-header span{font-size:.95rem;font-weight:500;letter-spacing:.5px}
+.share-card-score{text-align:center;margin-bottom:1.5rem}
+.share-card-score .big-score{font-family:var(--mono);font-size:4.5rem;font-weight:500;line-height:1}
+.share-card-score .score-label{font-size:.85rem;color:var(--text-muted);margin-top:.25rem}
+.share-card-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
+.share-card-metric{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:.75rem;text-align:center}
+.share-card-metric .scm-val{font-family:var(--mono);font-size:1.1rem;font-weight:500}
+.share-card-metric .scm-label{font-size:.68rem;color:var(--text-dim);margin-top:.2rem}
+.share-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid rgba(255,255,255,.06);font-size:.75rem;color:var(--text-dim)}
+.share-card-actions{display:flex;gap:.75rem;justify-content:center;margin-top:1.25rem}
+.share-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.2rem;border-radius:99px;font-size:.82rem;font-weight:500;border:none;cursor:pointer;font-family:var(--font);transition:all .2s}
+.share-btn-tw{background:#1DA1F2;color:#fff}
+.share-btn-tw:hover{background:#0d8bd9;transform:translateY(-1px)}
+.share-btn-dl{background:var(--violet);color:#fff}
+.share-btn-dl:hover{background:#7D6FF0;transform:translateY(-1px)}
+.share-score{margin-top:1rem;font-size:.82rem;color:var(--text-dim)}
+
+/* ===== PAIN SECTION ===== */
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:2rem}
+.pain-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.pain-card .reddit-tag{font-size:.75rem;color:var(--coral);margin-bottom:.75rem;display:flex;align-items:center;gap:.4rem}
+.pain-card .reddit-tag .dot{width:5px;height:5px;border-radius:50%;background:var(--coral)}
+.pain-card p{font-size:.9rem;color:var(--text-mid);line-height:1.6;font-style:italic}
+.pain-card .upvotes{font-size:.75rem;color:var(--text-dim);margin-top:.75rem}
+
+/* ===== HOW IT WORKS ===== */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.step-card{position:relative;padding:1.5rem}
+.step-card .step-num{font-family:var(--mono);font-size:2.5rem;font-weight:500;color:var(--violet);opacity:.3;margin-bottom:.5rem}
+.step-card h3{font-size:1rem;font-weight:500;margin-bottom:.5rem}
+.step-card p{font-size:.88rem;color:var(--text-muted);line-height:1.6}
+
+/* ===== COMPARISON ===== */
+.compare-table{width:100%;border-collapse:collapse;margin-top:2rem}
+.compare-table th,.compare-table td{padding:.75rem 1rem;text-align:center;font-size:.88rem;border-bottom:1px solid var(--border)}
+.compare-table th{color:var(--text-muted);font-weight:400;font-size:.8rem}
+.compare-table th:nth-child(2){color:var(--teal);font-weight:500}
+.compare-table td:first-child{text-align:left;color:var(--text-mid)}
+.compare-table td:nth-child(2){color:var(--teal)}
+.check{color:var(--teal)}
+.cross{color:var(--coral);opacity:.5}
+
+/* ===== WAITLIST ===== */
+.waitlist-section{text-align:center}
+.waitlist-form{display:flex;gap:.5rem;max-width:420px;margin:1.5rem auto 0}
+.waitlist-form input{flex:1;font-family:var(--font)}
+.waitlist-perks{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;font-size:.8rem;color:var(--text-dim)}
+.waitlist-perks span::before{content:'✓ ';color:var(--teal)}
+
+/* ===== FOOTER ===== */
+footer{padding:2rem;text-align:center;border-top:1px solid var(--border);font-size:.8rem;color:var(--text-dim)}
+footer a{color:var(--text-muted)}
+.disclaimer{margin-top:.5rem;font-size:.72rem;color:rgba(90,122,154,.5)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .nav-links a:not(.btn){display:none}
+  .hero h1{font-size:2rem}
+  .expense-grid{grid-template-columns:1fr}
+  .debt-row{grid-template-columns:1fr 1fr;gap:.5rem}
+  .debt-row .btn{grid-column:span 2;justify-self:end}
+  .metrics-row{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .donut-wrap{flex-direction:column}
+  .compare-table{font-size:.78rem}
+  .compare-table th,.compare-table td{padding:.5rem .4rem}
+  .waitlist-form{flex-direction:column}
+  .share-card-metrics{grid-template-columns:1fr}
+  .share-card-score .big-score{font-size:3.5rem}
+  .share-card-actions{flex-direction:column;align-items:stretch}
+  .share-btn{justify-content:center}
+}
+
+/* ===== ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 36 36" fill="none">
+      <rect width="36" height="36" rx="8" fill="#00D4AA"/>
+      <path d="M10 6L10 30" stroke="#182A42" stroke-width="3.8" stroke-linecap="round"/>
+      <path d="M10 6L27 6" stroke="#182A42" stroke-width="3.8" stroke-linecap="round"/>
+      <path d="M10 25C13 25 14 16 18 19C22 22 21 13 26 13" stroke="#6C5CE7" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="26" cy="13" r="2.5" fill="#6C5CE7"/>
+    </svg>
+    <span>Fund<span class="teal">shore</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#xray">Financial X-Ray</a>
+    <a href="#how">How it works</a>
+    <a href="https://tally.so/r/lbAYLN" target="_blank" class="btn btn-primary">Get early access</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> Beta launching Summer 2026</div>
+  <h1>Your finances, <em>finally clear</em></h1>
+  <p>Try our free Financial X-Ray — see your health score, find hidden waste, and get a personalized action plan. Takes 2 minutes, no signup required.</p>
+  <div class="hero-ctas">
+    <a href="#xray" class="btn btn-primary" style="font-size:1rem;padding:.8rem 2rem">Try Financial X-Ray — Free</a>
+    <a href="https://tally.so/r/lbAYLN" target="_blank" class="btn btn-ghost">Join waitlist</a>
+  </div>
+  <p class="hero-sub">Early access spots are limited — beta members get Fundshore free</p>
+</section>
+
+<!-- FINANCIAL X-RAY -->
+<section id="xray">
+  <div class="xray-container">
+    <div class="section-label" style="text-align:center">Financial X-Ray</div>
+    <h2 class="section-title" style="text-align:center">See your full financial picture in 2 minutes</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 1.5rem">No signup. No bank connection. Just honest numbers and real insights.</p>
+
+    <div style="text-align:center;margin-bottom:2.5rem">
+      <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;background:rgba(0,212,170,.04);border:1px solid rgba(0,212,170,.12);border-radius:10px;font-size:.8rem;color:var(--teal)">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L2 3.5V6.5C2 9.55 4.14 12.37 7 13C9.86 12.37 12 9.55 12 6.5V3.5L7 1Z" stroke="#00D4AA" stroke-width="1.2" stroke-linejoin="round"/><path d="M5 7L6.5 8.5L9 5.5" stroke="#00D4AA" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Your data stays in your browser. Nothing is stored, sent, or shared — ever.
+      </div>
+    </div>
+
+    <div class="xray-progress" id="progress">
+      <div class="step-col active"><div class="bar active"></div><span class="step-label">Income</span></div>
+      <div class="step-col"><div class="bar"></div><span class="step-label">Expenses</span></div>
+      <div class="step-col"><div class="bar"></div><span class="step-label">Debts</span></div>
+      <div class="step-col"><div class="bar"></div><span class="step-label">Results</span></div>
+    </div>
+
+    <!-- STEP 1: Income -->
+    <div class="xray-step active" id="step1">
+      <h3>What's your monthly income?</h3>
+      <p class="step-desc">After taxes — what actually hits your account each month.</p>
+      <div class="input-group">
+        <label>Monthly take-home pay</label>
+        <div class="currency-input">
+          <input type="number" id="income" placeholder="" min="0" step="100">
+        </div>
+        <div class="hint">If you have side income, add it all together.</div>
+      </div>
+      <div class="xray-nav">
+        <div></div>
+        <button class="btn btn-primary" onclick="goStep(2)">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Expenses -->
+    <div class="xray-step" id="step2">
+      <h3>Where does your money go?</h3>
+      <p class="step-desc">Rough estimates are fine — perfection isn't the goal, clarity is.</p>
+      <div class="expense-grid">
+        <div class="expense-item">
+          <div class="exp-icon">🏠</div>
+          <div class="exp-label">Housing (rent/mortgage)</div>
+          <div class="currency-input"><input type="number" class="exp" data-cat="housing" placeholder="" min="0" step="50"></div>
+        </div>
+        <div class="expense-item">
+          <div class="exp-icon">🍔</div>
+          <div class="exp-label">Food & groceries</div>
+          <div class="currency-input"><input type="number" class="exp" data-cat="food" placeholder="" min="0" step="50"></div>
+        </div>
+        <div class="expense-item">
+          <div class="exp-icon">🚗</div>
+          <div class="exp-label">Transport</div>
+          <div class="currency-input"><input type="number" class="exp" data-cat="transport" placeholder="" min="0" step="50"></div>
+        </div>
+        <div class="expense-item">
+          <div class="exp-icon">📱</div>
+          <div class="exp-label">Subscriptions & bills</div>
+          <div class="currency-input"><input type="number" class="exp" data-cat="subscriptions" placeholder="" min="0" step="10"></div>
+        </div>
+        <div class="expense-item">
+          <div class="exp-icon">🎮</div>
+          <div class="exp-label">Entertainment & fun</div>
+          <div class="currency-input"><input type="number" class="exp" data-cat="entertainment" placeholder="" min="0" step="50"></div>
+        </div>
+        <div class="expense-item">
+          <div class="exp-icon">📦</div>
+          <div class="exp-label">Everything else</div>
+          <div class="currency-input"><input type="number" class="exp" data-cat="other" placeholder="" min="0" step="50"></div>
+        </div>
+      </div>
+      <div class="xray-nav">
+        <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+        <button class="btn btn-primary" onclick="goStep(3)">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Debts -->
+    <div class="xray-step" id="step3">
+      <h3>Any debts?</h3>
+      <p class="step-desc">Credit cards, student loans, car payments — if it charges interest, list it here. Skip if none.</p>
+      <div id="debts-list">
+        <div class="debt-row">
+          <div class="input-group" style="margin:0"><label>Type</label><input type="text" class="debt-name" placeholder="e.g. Credit card"></div>
+          <div class="input-group" style="margin:0"><label>Balance</label><div class="currency-input"><input type="number" class="debt-bal" placeholder="" min="0"></div></div>
+          <div class="input-group" style="margin:0"><label class="apr-label">APR % <span class="apr-tip">?</span></label><input type="number" class="debt-apr" placeholder="22" min="0" max="100" step=".1"></div>
+          <button class="debt-remove" onclick="removeDebt(this)">Remove</button>
+        </div>
+      </div>
+      <button class="add-debt" onclick="addDebt()">+ Add another debt</button>
+      <div class="xray-nav">
+        <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
+        <button class="btn btn-secondary" onclick="calculateResults()">See my X-Ray results →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Results -->
+    <div class="xray-step" id="step4">
+      <div class="results-grid">
+        <!-- Health Score -->
+        <div class="score-card">
+          <div class="score-ring">
+            <svg width="180" height="180" viewBox="0 0 180 180">
+              <circle class="track" cx="90" cy="90" r="78"/>
+              <circle class="fill" id="score-arc" cx="90" cy="90" r="78" stroke-dasharray="490" stroke-dashoffset="490"/>
+            </svg>
+            <div class="score-value">
+              <div class="num" id="score-num">0</div>
+              <div class="label">Health Score</div>
+            </div>
+          </div>
+          <div id="score-text" style="font-size:.9rem;color:var(--text-mid)"></div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics-row" id="metrics-row"></div>
+
+        <!-- AI Analysis -->
+        <div class="ai-card" id="ai-card">
+          <h4>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" stroke-width="2" stroke-linecap="round"><path d="M12 2a4 4 0 014 4v2a4 4 0 01-8 0V6a4 4 0 014-4z"/><path d="M8 14s-4 2-4 6h16c0-4-4-6-4-6"/><circle cx="12" cy="6" r="1" fill="#6C5CE7" stroke="none"/></svg>
+            Your personal AI analysis
+          </h4>
+          <div id="ai-result">
+            <div class="ai-loading" id="ai-loading">
+              <div class="ai-dot"></div>
+              <div class="ai-dot"></div>
+              <div class="ai-dot"></div>
+              <span>Analyzing your financial picture...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Donut Chart -->
+        <div class="chart-card">
+          <h4>Where your money goes</h4>
+          <div class="donut-wrap">
+            <svg class="donut-svg" width="180" height="180" viewBox="0 0 180 180" id="donut"></svg>
+            <div class="donut-legend" id="donut-legend"></div>
+          </div>
+        </div>
+
+        <!-- 12-Month Projection -->
+        <div class="chart-card">
+          <h4>12-month projection</h4>
+          <canvas id="projection-chart" class="chart-canvas"></canvas>
+          <div style="font-size:.72rem;color:var(--text-dim);margin-top:.5rem;line-height:1.4">The teal line shows your trajectory if you follow the optimization plan from Fundshore. Projections are estimates based on the data you entered.</div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="rec-card">
+          <h4>Recommendations</h4>
+          <div id="recs-list"></div>
+        </div>
+
+        <!-- Share Card -->
+        <div class="share-card" id="share-card">
+          <div class="share-card-inner">
+            <div class="share-card-header">
+              <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#00D4AA"/><path d="M10 6L10 30" stroke="#182A42" stroke-width="3.8" stroke-linecap="round"/><path d="M10 6L27 6" stroke="#182A42" stroke-width="3.8" stroke-linecap="round"/><path d="M10 25C13 25 14 16 18 19C22 22 21 13 26 13" stroke="#6C5CE7" stroke-width="3.5" stroke-linecap="round"/><circle cx="26" cy="13" r="2.5" fill="#6C5CE7"/></svg>
+              <span>Fund<span style="color:var(--teal)">shore</span> Financial X-Ray</span>
+            </div>
+            <div class="share-card-score">
+              <div class="big-score" id="share-score-num" style="color:var(--teal)">0</div>
+              <div class="score-label">Financial Health Score</div>
+            </div>
+            <div class="share-card-metrics" id="share-metrics"></div>
+            <div class="share-card-footer">
+              <span>fundshore.netlify.app</span>
+              <span>Free · No signup · 2 min</span>
+            </div>
+          </div>
+        </div>
+        <div class="share-card-actions">
+          <button class="share-btn share-btn-tw" onclick="shareTwitter()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Share on Twitter
+          </button>
+          <button class="share-btn share-btn-dl" onclick="downloadCard()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Download image
+          </button>
+        </div>
+
+        <!-- CTA -->
+        <div class="results-cta">
+          <h4>This is just the X-Ray.</h4>
+          <p>The full Fundshore AI advisor tracks your progress, adapts to changes, and gives you step-by-step guidance — launching this summer.</p>
+          <a href="https://tally.so/r/lbAYLN" target="_blank" class="btn btn-primary" style="font-size:1rem;padding:.8rem 2rem;margin-bottom:.75rem">Get free early access →</a>
+        </div>
+      </div>
+      <div class="xray-nav">
+        <button class="btn btn-ghost" onclick="goStep(1)">← Start over</button>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section>
+  <div class="container reveal">
+    <div class="section-label">The problem</div>
+    <h2 class="section-title">Real people. Real frustration.</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="reddit-tag"><span class="dot"></span> r/personalfinance</div>
+        <p>"I make $85k but have no idea if I can afford a house. Every calculator gives me a different number."</p>
+        <div class="upvotes">▲ 2.3k · 847 comments</div>
+      </div>
+      <div class="pain-card">
+        <div class="reddit-tag"><span class="dot"></span> r/financialindependence</div>
+        <p>"Talked to a financial advisor. $400/hour just to tell me to open a Roth IRA — something I could've googled."</p>
+        <div class="upvotes">▲ 1.8k · 623 comments</div>
+      </div>
+      <div class="pain-card">
+        <div class="reddit-tag"><span class="dot"></span> r/povertyfinance</div>
+        <p>"I asked ChatGPT about my debt. It gave me a plan that doesn't work with my income."</p>
+        <div class="upvotes">▲ 3.1k · 1.2k comments</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container reveal">
+    <div class="section-label" style="text-align:center">How it works</div>
+    <h2 class="section-title" style="text-align:center">Three minutes to your plan</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Share your numbers</h3>
+        <p>Income, debts, goals, worries — share as much or as little as you want. Fundshore listens without judgment.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Get your X-Ray</h3>
+        <p>Health Score, spending breakdown, 12-month projection — see your full picture in one clear dashboard.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Follow the plan</h3>
+        <p>Specific actions with exact dollar amounts. Not generic tips — a roadmap built for your real situation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section>
+  <div class="container reveal">
+    <div class="section-label" style="text-align:center">Comparison</div>
+    <h2 class="section-title" style="text-align:center">Why not just use ChatGPT?</h2>
+    <table class="compare-table">
+      <thead><tr><th></th><th>Fundshore</th><th>ChatGPT</th><th>Advisor</th></tr></thead>
+      <tbody>
+        <tr><td>Remembers your finances</td><td class="check">✓</td><td class="cross">✗</td><td class="check">✓</td></tr>
+        <tr><td>Personalized calculations</td><td class="check">✓</td><td>Sometimes</td><td class="check">✓</td></tr>
+        <tr><td>Available 24/7</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td></tr>
+        <tr><td>Under $20/month</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td></tr>
+        <tr><td>Visual dashboards</td><td class="check">✓</td><td class="cross">✗</td><td>Varies</td></tr>
+        <tr><td>No judgment</td><td class="check">✓</td><td class="check">✓</td><td>Varies</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section id="waitlist">
+  <div class="container waitlist-section reveal">
+    <div class="section-label">Early access</div>
+    <h2 class="section-title">Your finances deserve a safe harbor</h2>
+    <p class="section-sub" style="margin:0 auto">Join the waitlist for free early access when we launch. Early members get Fundshore free during beta.</p>
+    <div style="margin-top:1.5rem">
+      <a href="https://tally.so/r/lbAYLN" target="_blank" class="btn btn-primary" style="font-size:1rem;padding:.85rem 2.5rem">Join the waitlist →</a>
+    </div>
+    <div class="waitlist-perks">
+      <span>Free during beta</span>
+      <span>No credit card</span>
+      <span>Cancel anytime</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Fundshore · <a href="https://fundshore.app">fundshore.app</a></p>
+  <p class="disclaimer">Fundshore provides financial education and tools, not investment advice. Not a registered investment advisor.</p>
+</footer>
+
+<script>
+// ===== STEP NAVIGATION =====
+let currentStep = 1;
+function goStep(n) {
+  if (n === 2 && !document.getElementById('income').value) {
+    document.getElementById('income').focus();
+    document.getElementById('income').style.borderColor = 'var(--coral)';
+    setTimeout(() => document.getElementById('income').style.borderColor = '', 1500);
+    return;
+  }
+  currentStep = n;
+  document.querySelectorAll('.xray-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+  const cols = document.querySelectorAll('.xray-progress .step-col');
+  cols.forEach((col, i) => {
+    const bar = col.querySelector('.bar');
+    col.className = 'step-col';
+    bar.className = 'bar';
+    if (i < n - 1) { col.classList.add('done'); bar.classList.add('done'); }
+    if (i === n - 1) { col.classList.add('active'); bar.classList.add('active'); }
+  });
+  document.getElementById('xray').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ===== DEBT ROWS =====
+function addDebt() {
+  const list = document.getElementById('debts-list');
+  const row = document.createElement('div');
+  row.className = 'debt-row';
+  row.innerHTML = `
+    <div class="input-group" style="margin:0"><label>Type</label><input type="text" class="debt-name" placeholder="e.g. Car loan"></div>
+    <div class="input-group" style="margin:0"><label>Balance</label><div class="currency-input"><input type="number" class="debt-bal" placeholder="" min="0"></div></div>
+    <div class="input-group" style="margin:0"><label class="apr-label">APR % <span class="apr-tip">?</span></label><input type="number" class="debt-apr" placeholder="7" min="0" max="100" step=".1"></div>
+    <button class="debt-remove" onclick="removeDebt(this)">Remove</button>`;
+  list.appendChild(row);
+}
+function removeDebt(btn) {
+  const rows = document.querySelectorAll('.debt-row');
+  if (rows.length > 1) btn.closest('.debt-row').remove();
+}
+
+// ===== CALCULATE RESULTS =====
+function calculateResults() {
+  const income = parseFloat(document.getElementById('income').value) || 0;
+  if (income === 0) { goStep(1); return; }
+
+  const expenses = {};
+  let totalExp = 0;
+  document.querySelectorAll('.exp').forEach(inp => {
+    const v = parseFloat(inp.value) || 0;
+    expenses[inp.dataset.cat] = v;
+    totalExp += v;
+  });
+
+  const debts = [];
+  let totalDebt = 0, totalInterest = 0;
+  document.querySelectorAll('.debt-row').forEach(row => {
+    const name = row.querySelector('.debt-name').value || 'Debt';
+    const bal = parseFloat(row.querySelector('.debt-bal').value) || 0;
+    const apr = parseFloat(row.querySelector('.debt-apr').value) || 0;
+    if (bal > 0) {
+      debts.push({ name, bal, apr });
+      totalDebt += bal;
+      totalInterest += bal * (apr / 100) / 12;
+    }
+  });
+
+  const surplus = income - totalExp - totalInterest;
+  const savingsRate = income > 0 ? Math.max(0, surplus / income * 100) : 0;
+
+  // ===== HEALTH SCORE (0-100) =====
+  let score = 50;
+  // Savings rate component (40 points)
+  if (savingsRate >= 20) score += 30;
+  else if (savingsRate >= 10) score += 20;
+  else if (savingsRate >= 5) score += 10;
+  else if (savingsRate > 0) score += 5;
+  else score -= 15;
+  // Housing ratio (15 points) — recommended < 30%
+  const housingRatio = income > 0 ? (expenses.housing || 0) / income * 100 : 0;
+  if (housingRatio <= 28) score += 15;
+  else if (housingRatio <= 35) score += 8;
+  else if (housingRatio <= 50) score -= 5;
+  else score -= 15;
+  // Debt-to-income (20 points)
+  const dti = income > 0 ? totalInterest / income * 100 : 0;
+  if (dti === 0) score += 15;
+  else if (dti < 5) score += 10;
+  else if (dti < 10) score += 0;
+  else if (dti < 20) score -= 10;
+  else score -= 20;
+  // Subscriptions check (5 points)
+  const subRatio = income > 0 ? (expenses.subscriptions || 0) / income * 100 : 0;
+  if (subRatio <= 3) score += 5;
+  else if (subRatio <= 6) score += 0;
+  else score -= 5;
+  // Entertainment check (5 points)
+  const funRatio = income > 0 ? (expenses.entertainment || 0) / income * 100 : 0;
+  if (funRatio <= 10) score += 5;
+  else if (funRatio <= 20) score += 0;
+  else score -= 5;
+
+  score = Math.max(5, Math.min(98, Math.round(score)));
+
+  // ===== RENDER SCORE RING =====
+  goStep(4);
+  const arc = document.getElementById('score-arc');
+  const circ = 2 * Math.PI * 78;
+  const offset = circ - (score / 100) * circ;
+  let scoreColor = score >= 70 ? 'var(--teal)' : score >= 45 ? 'var(--violet)' : 'var(--coral)';
+  arc.style.stroke = scoreColor;
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 100);
+  let counter = 0;
+  const numEl = document.getElementById('score-num');
+  const interval = setInterval(() => {
+    counter += Math.ceil(score / 40);
+    if (counter >= score) { counter = score; clearInterval(interval); }
+    numEl.textContent = counter;
+    numEl.style.color = scoreColor;
+  }, 30);
+
+  const scoreTexts = {
+    high: "Great shape! You're ahead of most Americans. A few tweaks could push you even further.",
+    mid: "You're managing, but there's real room to improve. The recommendations below can make a big difference.",
+    low: "Your finances are under stress — but that's exactly why you're here. Follow the plan below to start turning things around."
+  };
+  document.getElementById('score-text').textContent = score >= 70 ? scoreTexts.high : score >= 45 ? scoreTexts.mid : scoreTexts.low;
+
+  // ===== KEY METRICS =====
+  const metricsHtml = `
+    <div class="metric-card"><div class="mc-label">Monthly surplus</div><div class="mc-value ${surplus >= 0 ? 'mc-teal' : 'mc-coral'}">${surplus >= 0 ? '+' : ''}$${Math.abs(Math.round(surplus)).toLocaleString()}</div><div class="mc-sub">${savingsRate.toFixed(0)}% savings rate</div></div>
+    <div class="metric-card"><div class="mc-label">Total debt</div><div class="mc-value ${totalDebt > 0 ? 'mc-coral' : 'mc-teal'}">$${Math.round(totalDebt).toLocaleString()}</div><div class="mc-sub">$${Math.round(totalInterest).toLocaleString()}/mo in interest</div></div>
+    <div class="metric-card"><div class="mc-label">Invest-ready in</div><div class="mc-value mc-violet">${totalDebt > 0 && surplus > 0 ? Math.ceil(totalDebt / surplus) + ' mo' : totalDebt === 0 ? 'Now' : '—'}</div><div class="mc-sub">${totalDebt > 0 && surplus > 0 ? 'After debt payoff' : totalDebt === 0 && surplus > 0 ? 'Start investing today' : 'Need positive surplus'}</div></div>`;
+  document.getElementById('metrics-row').innerHTML = metricsHtml;
+
+  // ===== DONUT CHART =====
+  const cats = [
+    { key: 'housing', name: 'Housing', color: '#00D4AA' },
+    { key: 'food', name: 'Food', color: '#6C5CE7' },
+    { key: 'transport', name: 'Transport', color: '#3B82C4' },
+    { key: 'subscriptions', name: 'Subscriptions', color: '#F4C542' },
+    { key: 'entertainment', name: 'Entertainment', color: '#FF6B8A' },
+    { key: 'other', name: 'Other', color: '#5A7A9A' }
+  ];
+  if (totalInterest > 0) cats.push({ key: '_interest', name: 'Debt interest', color: '#E04848' });
+  if (surplus > 0) cats.push({ key: '_savings', name: 'Savings', color: '#00FFD0' });
+
+  const donutData = cats.map(c => {
+    if (c.key === '_interest') return { ...c, val: totalInterest };
+    if (c.key === '_savings') return { ...c, val: surplus };
+    return { ...c, val: expenses[c.key] || 0 };
+  }).filter(d => d.val > 0);
+
+  const donutTotal = donutData.reduce((s, d) => s + d.val, 0);
+  const donutSvg = document.getElementById('donut');
+  let cumAngle = 0;
+  const r = 70, cx = 90, cy = 90;
+  let paths = '';
+  donutData.forEach(d => {
+    const pct = d.val / donutTotal;
+    const angle = pct * 360;
+    const large = angle > 180 ? 1 : 0;
+    const startRad = (cumAngle - 90) * Math.PI / 180;
+    const endRad = (cumAngle + angle - 90) * Math.PI / 180;
+    const x1 = cx + r * Math.cos(startRad), y1 = cy + r * Math.sin(startRad);
+    const x2 = cx + r * Math.cos(endRad), y2 = cy + r * Math.sin(endRad);
+    if (donutData.length === 1) {
+      paths += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${d.color}" stroke-width="24"/>`;
+    } else {
+      paths += `<path d="M${x1} ${y1} A${r} ${r} 0 ${large} 1 ${x2} ${y2}" fill="none" stroke="${d.color}" stroke-width="24" stroke-linecap="butt"/>`;
+    }
+    cumAngle += angle + .5;
+  });
+  donutSvg.innerHTML = paths + `<text x="${cx}" y="${cy - 4}" text-anchor="middle" fill="var(--text)" font-family="var(--mono)" font-size="18" font-weight="500">$${donutTotal.toLocaleString()}</text><text x="${cx}" y="${cy + 14}" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font)" font-size="10">/month total</text>`;
+
+  let legHtml = '';
+  donutData.forEach(d => {
+    const pct = (d.val / donutTotal * 100).toFixed(0);
+    legHtml += `<div class="leg-item"><span class="leg-dot" style="background:${d.color}"></span><span class="leg-name">${d.name}</span><span class="leg-val">$${Math.round(d.val).toLocaleString()}</span><span class="leg-pct">${pct}%</span></div>`;
+  });
+  document.getElementById('donut-legend').innerHTML = legHtml;
+
+  // ===== 12-MONTH PROJECTION =====
+  const canvas = document.getElementById('projection-chart');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth * 2;
+  canvas.height = canvas.offsetHeight * 2;
+  ctx.scale(2, 2);
+  const W = canvas.offsetWidth, H = canvas.offsetHeight;
+  const pad = { t: 20, r: 16, b: 30, l: 50 };
+
+  const currentPath = [], optimizedPath = [];
+  let cumCurrent = 0, cumOptimized = 0;
+  const potentialSavings = (expenses.subscriptions || 0) * .4 + (expenses.entertainment || 0) * .3 + (expenses.other || 0) * .2;
+  for (let m = 0; m <= 12; m++) {
+    cumCurrent += surplus;
+    cumOptimized += surplus + potentialSavings;
+    currentPath.push(cumCurrent);
+    optimizedPath.push(cumOptimized);
+  }
+
+  const allVals = [...currentPath, ...optimizedPath];
+  const minV = Math.min(...allVals, 0), maxV = Math.max(...allVals, 100);
+  const rangeV = maxV - minV || 1;
+
+  function xPos(i) { return pad.l + (i / 12) * (W - pad.l - pad.r); }
+  function yPos(v) { return pad.t + (1 - (v - minV) / rangeV) * (H - pad.t - pad.b); }
+
+  // Grid
+  ctx.strokeStyle = 'rgba(30,58,86,.4)';
+  ctx.lineWidth = .5;
+  for (let i = 0; i < 5; i++) {
+    const y = pad.t + i * (H - pad.t - pad.b) / 4;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+    const val = maxV - i * rangeV / 4;
+    ctx.fillStyle = '#5A7A9A'; ctx.font = '10px DM Mono, monospace'; ctx.textAlign = 'right';
+    ctx.fillText('$' + Math.round(val).toLocaleString(), pad.l - 6, y + 3);
+  }
+  // Month labels
+  ctx.textAlign = 'center'; ctx.fillStyle = '#3A5A78'; ctx.font = '9px DM Sans, sans-serif';
+  for (let i = 0; i <= 12; i += 3) {
+    ctx.fillText('M' + i, xPos(i), H - 8);
+  }
+
+  // Zero line
+  if (minV < 0) {
+    ctx.strokeStyle = 'rgba(255,107,138,.3)'; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(pad.l, yPos(0)); ctx.lineTo(W - pad.r, yPos(0)); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Current line
+  ctx.strokeStyle = '#5A7A9A'; ctx.lineWidth = 2; ctx.beginPath();
+  currentPath.forEach((v, i) => { i === 0 ? ctx.moveTo(xPos(i), yPos(v)) : ctx.lineTo(xPos(i), yPos(v)); });
+  ctx.stroke();
+
+  // Optimized line
+  ctx.strokeStyle = '#00D4AA'; ctx.lineWidth = 2.5; ctx.beginPath();
+  optimizedPath.forEach((v, i) => { i === 0 ? ctx.moveTo(xPos(i), yPos(v)) : ctx.lineTo(xPos(i), yPos(v)); });
+  ctx.stroke();
+
+  // Fill between
+  ctx.fillStyle = 'rgba(0,212,170,.06)'; ctx.beginPath();
+  optimizedPath.forEach((v, i) => { i === 0 ? ctx.moveTo(xPos(i), yPos(v)) : ctx.lineTo(xPos(i), yPos(v)); });
+  for (let i = 12; i >= 0; i--) ctx.lineTo(xPos(i), yPos(currentPath[i]));
+  ctx.closePath(); ctx.fill();
+
+  // Dots at end
+  ctx.fillStyle = '#5A7A9A'; ctx.beginPath(); ctx.arc(xPos(12), yPos(currentPath[12]), 4, 0, 7); ctx.fill();
+  ctx.fillStyle = '#00D4AA'; ctx.beginPath(); ctx.arc(xPos(12), yPos(optimizedPath[12]), 5, 0, 7); ctx.fill();
+
+  // Labels at end
+  ctx.font = '500 11px DM Mono, monospace'; ctx.textAlign = 'left';
+  ctx.fillStyle = '#5A7A9A'; ctx.fillText('$' + Math.round(currentPath[12]).toLocaleString(), xPos(12) + 10, yPos(currentPath[12]) + 4);
+  ctx.fillStyle = '#00D4AA'; ctx.fillText('$' + Math.round(optimizedPath[12]).toLocaleString(), xPos(12) + 10, yPos(optimizedPath[12]) + 4);
+
+  // Legend
+  ctx.font = '10px DM Sans, sans-serif';
+  ctx.fillStyle = '#5A7A9A'; ctx.fillRect(pad.l, pad.t - 14, 10, 3); ctx.fillText('Current path', pad.l + 16, pad.t - 10);
+  ctx.fillStyle = '#00D4AA'; ctx.fillRect(pad.l + 120, pad.t - 14, 10, 3); ctx.fillText('With Fundshore plan', pad.l + 136, pad.t - 10);
+
+  // ===== RECOMMENDATIONS =====
+  const recs = [];
+  // 50/30/20 check
+  if (housingRatio > 30) {
+    recs.push({ title: 'Housing is ' + housingRatio.toFixed(0) + '% of income', desc: 'The guideline is under 30%. Consider negotiating rent, getting a roommate, or exploring cheaper areas.', save: '' });
+  }
+  // High-APR debt
+  debts.filter(d => d.apr > 15).forEach(d => {
+    const monthlyInt = Math.round(d.bal * d.apr / 100 / 12);
+    recs.push({ title: 'Kill ' + d.name + ' first (' + d.apr + '% APR)', desc: `You're paying ~$${monthlyInt}/mo in interest alone. Paying $${Math.round(d.bal / 6)}/mo extra clears this in ~6 months.`, save: '+$' + monthlyInt + '/mo freed after payoff' });
+  });
+  // Subscriptions
+  if (subRatio > 3) {
+    const target = Math.round(income * .03);
+    const saving = (expenses.subscriptions || 0) - target;
+    recs.push({ title: 'Subscriptions at ' + subRatio.toFixed(0) + '% (target: 3%)', desc: 'You likely have services you forgot about or rarely use. A detailed audit could reveal surprising savings.', save: 'Potential saving: $' + saving + '/mo' });
+  }
+  // Entertainment
+  if (funRatio > 10) {
+    recs.push({ title: 'Entertainment at ' + funRatio.toFixed(0) + '% of income', desc: 'Not saying cut the fun — but switching some paid activities to free alternatives can add up fast.', save: '' });
+  }
+  // Savings rate
+  if (savingsRate < 10 && surplus > 0) {
+    recs.push({ title: 'Savings rate is only ' + savingsRate.toFixed(0) + '%', desc: 'Even getting to 10% makes a huge difference long-term. The optimization above could get you to ' + Math.min(30, savingsRate + potentialSavings / income * 100).toFixed(0) + '%.', save: '' });
+  }
+  if (surplus > 0 && totalDebt === 0) {
+    recs.push({ title: 'You\'re ready to build wealth', desc: 'With no debt and positive cash flow, consider channeling your surplus into productive assets: starting a side business, acquiring income-generating property, learning a high-value skill, or building equity in a venture you believe in.', save: '$' + Math.round(surplus * 12).toLocaleString() + '/year available to deploy' });
+  }
+  if (potentialSavings > 50) {
+    recs.push({ title: 'Quick wins: $' + Math.round(potentialSavings) + '/mo available', desc: 'By cutting subscriptions by 40%, entertainment by 30%, and misc by 20%, you free up meaningful cash — without changing your lifestyle dramatically.', save: '$' + Math.round(potentialSavings * 12).toLocaleString() + '/year potential' });
+  }
+  if (recs.length === 0) {
+    recs.push({ title: 'Looking solid!', desc: 'Your finances are in good shape. Keep your current trajectory and you\'ll build wealth steadily. Consider increasing your savings rate or channeling surplus into a productive venture or asset.', save: '' });
+  }
+
+  let recsHtml = '';
+  recs.forEach(r => {
+    recsHtml += `<div class="rec-item"><div class="rec-title">${r.title}</div><div class="rec-desc">${r.desc}</div>${r.save ? '<div class="rec-save">' + r.save + '</div>' : ''}</div>`;
+  });
+  recsHtml += `<div style="margin-top:1rem;padding:1rem;background:rgba(108,92,231,.08);border:1px solid rgba(108,92,231,.2);border-radius:10px"><div style="font-size:.88rem;font-weight:500;color:var(--violet);margin-bottom:.3rem">Want step-by-step guidance on all of this?</div><div style="font-size:.8rem;color:var(--text-muted);line-height:1.5">The full Fundshore advisor will walk you through each recommendation with a personalized action plan, smart subscription audits, spending alerts, and progress tracking. Join the waitlist to be first in line.</div></div>`;
+  document.getElementById('recs-list').innerHTML = recsHtml;
+
+  // Store for sharing
+  window._xrayScore = score;
+  window._xraySurplus = surplus;
+  window._xrayDebt = totalDebt;
+  window._xraySavingsRate = savingsRate;
+
+  // ===== AI ANALYSIS =====
+  document.getElementById('ai-result').innerHTML = `<div class="ai-loading" id="ai-loading"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div><span>Analyzing your financial picture...</span></div>`;
+
+  (async function() {
+    try {
+      const res = await fetch('/.netlify/functions/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          income, expenses, debts, score, surplus, savingsRate, totalDebt, totalInterest
+        })
+      });
+      const data = await res.json();
+      if (data.analysis) {
+        const paragraphs = data.analysis.split('\n').filter(p => p.trim()).map(p => `<p style="margin-bottom:.75rem">${p}</p>`).join('');
+        document.getElementById('ai-result').innerHTML = `<div class="ai-text">${paragraphs}</div>`;
+      } else {
+        document.getElementById('ai-result').innerHTML = `<div class="ai-text">${data.error || 'Analysis unavailable right now. Your dashboard and recommendations above are still accurate.'}</div>`;
+      }
+    } catch(e) {
+      document.getElementById('ai-result').innerHTML = `<div class="ai-text">AI analysis is connecting... Your dashboard and recommendations above are ready. Refresh to try again.</div>`;
+    }
+  })();
+
+  // ===== POPULATE SHARE CARD =====
+  const shareScoreEl = document.getElementById('share-score-num');
+  shareScoreEl.textContent = score;
+  shareScoreEl.style.color = scoreColor;
+  const shareMetrics = document.getElementById('share-metrics');
+  shareMetrics.innerHTML = `
+    <div class="share-card-metric"><div class="scm-val" style="color:${surplus >= 0 ? 'var(--teal)' : 'var(--coral)'}">${surplus >= 0 ? '+' : ''}$${Math.abs(Math.round(surplus)).toLocaleString()}</div><div class="scm-label">Monthly surplus</div></div>
+    <div class="share-card-metric"><div class="scm-val" style="color:var(--violet)">${savingsRate.toFixed(0)}%</div><div class="scm-label">Savings rate</div></div>
+    <div class="share-card-metric"><div class="scm-val" style="color:${totalDebt > 0 ? 'var(--coral)' : 'var(--teal)'}">${totalDebt > 0 ? '$' + Math.round(totalDebt).toLocaleString() : 'None'}</div><div class="scm-label">Total debt</div></div>`;
+}
+
+// ===== EMAIL SUBMIT =====
+function submitEmail(inputId) {
+  const inp = document.getElementById(inputId);
+  const email = inp.value.trim();
+  if (!email || !email.includes('@')) { inp.style.borderColor = 'var(--coral)'; setTimeout(() => inp.style.borderColor = '', 1500); return; }
+  const btn = inp.nextElementSibling;
+  btn.textContent = '✓ You\'re in!';
+  btn.style.background = 'var(--violet)';
+  inp.value = '';
+  setTimeout(() => { btn.textContent = 'Join waitlist'; btn.style.background = ''; }, 3000);
+}
+
+// ===== SHARE TWITTER =====
+function shareTwitter() {
+  const score = window._xrayScore || 0;
+  const text = `My Financial Health Score: ${score}/100\n\nJust took the free Fundshore X-Ray — 2 minutes, no signup.\n\nWhat's yours? fundshore.netlify.app/#xray`;
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text), '_blank');
+}
+
+// ===== DOWNLOAD SHARE CARD =====
+function downloadCard() {
+  const score = window._xrayScore || 0;
+  const surplus = window._xraySurplus || 0;
+  const debt = window._xrayDebt || 0;
+  const rate = window._xraySavingsRate || 0;
+  const scoreColor = score >= 70 ? '#00D4AA' : score >= 45 ? '#6C5CE7' : '#FF6B8A';
+
+  const c = document.createElement('canvas');
+  c.width = 1200; c.height = 630;
+  const ctx = c.getContext('2d');
+
+  // Background
+  ctx.fillStyle = '#132236';
+  ctx.fillRect(0, 0, 1200, 630);
+
+  // Subtle gradient overlay
+  const grd = ctx.createRadialGradient(200, 200, 0, 200, 200, 500);
+  grd.addColorStop(0, 'rgba(0,212,170,0.06)');
+  grd.addColorStop(1, 'transparent');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, 1200, 630);
+
+  const grd2 = ctx.createRadialGradient(1000, 500, 0, 1000, 500, 400);
+  grd2.addColorStop(0, 'rgba(108,92,231,0.05)');
+  grd2.addColorStop(1, 'transparent');
+  ctx.fillStyle = grd2;
+  ctx.fillRect(0, 0, 1200, 630);
+
+  // Logo mark (simplified)
+  ctx.fillStyle = '#00D4AA';
+  roundRect(ctx, 50, 40, 48, 48, 10); ctx.fill();
+  ctx.strokeStyle = '#182A42'; ctx.lineWidth = 4; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(64, 52); ctx.lineTo(64, 78); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(64, 52); ctx.lineTo(86, 52); ctx.stroke();
+  ctx.strokeStyle = '#6C5CE7'; ctx.lineWidth = 3.5;
+  ctx.beginPath(); ctx.moveTo(64, 68); ctx.bezierCurveTo(70, 68, 72, 58, 76, 62); ctx.bezierCurveTo(80, 66, 80, 56, 86, 56); ctx.stroke();
+  ctx.fillStyle = '#6C5CE7';
+  ctx.beginPath(); ctx.arc(86, 56, 2.5, 0, Math.PI * 2); ctx.fill();
+
+  // Brand name
+  ctx.font = '500 22px DM Sans, sans-serif';
+  ctx.fillStyle = '#E4ECF4';
+  ctx.fillText('Fund', 110, 72);
+  ctx.fillStyle = '#00D4AA';
+  ctx.fillText('shore', 162, 72);
+
+  // Divider line
+  ctx.strokeStyle = 'rgba(30,58,86,0.5)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(50, 110); ctx.lineTo(1150, 110); ctx.stroke();
+
+  // Score
+  ctx.font = '500 140px DM Mono, monospace';
+  ctx.fillStyle = scoreColor;
+  ctx.fillText(score.toString(), 80, 310);
+
+  // /100 label
+  ctx.font = '400 36px DM Mono, monospace';
+  ctx.fillStyle = '#5A7A9A';
+  const scoreW = ctx.measureText(score.toString()).width;
+  ctx.font = '500 140px DM Mono, monospace';
+  const sw = ctx.measureText(score.toString()).width;
+  ctx.font = '400 36px DM Mono, monospace';
+  ctx.fillText('/100', 80 + sw + 10, 310);
+
+  // Health Score label
+  ctx.font = '400 20px DM Sans, sans-serif';
+  ctx.fillStyle = '#5A7A9A';
+  ctx.fillText('Financial Health Score', 80, 350);
+
+  // Right side metrics
+  const mx = 700, my = 160;
+
+  // Metric 1 - Surplus
+  ctx.fillStyle = 'rgba(255,255,255,0.04)';
+  roundRect(ctx, mx, my, 400, 80, 12); ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.lineWidth = 1;
+  roundRect(ctx, mx, my, 400, 80, 12); ctx.stroke();
+  ctx.font = '500 28px DM Mono, monospace';
+  ctx.fillStyle = surplus >= 0 ? '#00D4AA' : '#FF6B8A';
+  ctx.fillText((surplus >= 0 ? '+$' : '-$') + Math.abs(Math.round(surplus)).toLocaleString() + '/mo', mx + 24, my + 36);
+  ctx.font = '400 14px DM Sans, sans-serif';
+  ctx.fillStyle = '#5A7A9A';
+  ctx.fillText('Monthly surplus', mx + 24, my + 62);
+
+  // Metric 2 - Savings rate
+  ctx.fillStyle = 'rgba(255,255,255,0.04)';
+  roundRect(ctx, mx, my + 100, 190, 80, 12); ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  roundRect(ctx, mx, my + 100, 190, 80, 12); ctx.stroke();
+  ctx.font = '500 28px DM Mono, monospace';
+  ctx.fillStyle = '#6C5CE7';
+  ctx.fillText(rate.toFixed(0) + '%', mx + 24, my + 136);
+  ctx.font = '400 14px DM Sans, sans-serif';
+  ctx.fillStyle = '#5A7A9A';
+  ctx.fillText('Savings rate', mx + 24, my + 162);
+
+  // Metric 3 - Debt
+  ctx.fillStyle = 'rgba(255,255,255,0.04)';
+  roundRect(ctx, mx + 210, my + 100, 190, 80, 12); ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  roundRect(ctx, mx + 210, my + 100, 190, 80, 12); ctx.stroke();
+  ctx.font = '500 28px DM Mono, monospace';
+  ctx.fillStyle = debt > 0 ? '#FF6B8A' : '#00D4AA';
+  ctx.fillText(debt > 0 ? '$' + Math.round(debt).toLocaleString() : 'None', mx + 234, my + 136);
+  ctx.font = '400 14px DM Sans, sans-serif';
+  ctx.fillStyle = '#5A7A9A';
+  ctx.fillText('Total debt', mx + 234, my + 162);
+
+  // Bottom bar
+  ctx.fillStyle = 'rgba(30,58,86,0.3)';
+  ctx.fillRect(0, 570, 1200, 60);
+  ctx.font = '400 16px DM Sans, sans-serif';
+  ctx.fillStyle = '#5A7A9A';
+  ctx.fillText('fundshore.netlify.app', 80, 606);
+  ctx.fillStyle = '#3A5A78';
+  ctx.textAlign = 'right';
+  ctx.fillText('Free \u00b7 No signup \u00b7 2 minutes', 1120, 606);
+  ctx.textAlign = 'left';
+
+  // CTA
+  ctx.font = '500 18px DM Sans, sans-serif';
+  ctx.fillStyle = '#00D4AA';
+  ctx.fillText("What's your score?", 80, 520);
+
+  // Download
+  const link = document.createElement('a');
+  link.download = 'fundshore-score-' + score + '.png';
+  link.href = c.toDataURL('image/png');
+  link.click();
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// ===== SCROLL REVEAL =====
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: .15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== FIX LEADING ZEROS =====
+document.addEventListener('input', function(e) {
+  if (e.target.type === 'number' || (e.target.type === 'text' && e.target.closest('.currency-input'))) {
+    const v = e.target.value;
+    if (v.length > 1 && v[0] === '0' && v[1] !== '.') {
+      e.target.value = v.replace(/^0+/, '') || '';
+    }
+  }
+});
+</script>
+</body>
+</html>
