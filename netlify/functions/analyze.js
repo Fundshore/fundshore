@@ -1,47 +1,62 @@
 exports.handler = async (event) => {
-  // Only allow POST
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method not allowed" };
-  }
+  if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method not allowed" };
 
   try {
     const data = JSON.parse(event.body);
+
+    // Chat mode: multi-turn conversation
+    if (data.chatMode && data.chatHistory) {
+      const messages = [
+        { role: "user", content: data.systemCtx + "\n\nRemember all rules above. Now respond to the conversation:" },
+        { role: "assistant", content: "Got it — I have the full financial picture and all rules. Ready to help." },
+        ...data.chatHistory
+      ];
+
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.ANTHROPIC_API_KEY,
+          "anthropic-version": "2023-06-01"
+        },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 400,
+          messages
+        })
+      });
+
+      if (!response.ok) {
+        return { statusCode: 500, headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ error: "AI advisor is temporarily unavailable. Try again in a moment." }) };
+      }
+
+      const result = await response.json();
+      const text = result.content.filter(i => i.type === "text").map(i => i.text).join("");
+      return { statusCode: 200, headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ analysis: text }) };
+    }
+
+    // Initial analysis mode (non-chat)
     const { income, expenses, debts, score, surplus, savingsRate, totalDebt, totalInterest } = data;
 
-    // Build a clear financial picture for Claude
     const expenseLines = Object.entries(expenses)
       .filter(([_, v]) => v > 0)
       .map(([cat, val]) => `${cat}: $${val}/mo (${((val / income) * 100).toFixed(1)}%)`)
       .join("\n");
 
-    const debtLines = debts.length > 0
-      ? debts.map(d => `${d.name}: $${d.bal} balance at ${d.apr}% APR`).join("\n")
+    const debtLines = debts && debts.length > 0
+      ? debts.map(d => `${d.name}: $${d.bal} at ${d.apr}% APR`).join("\n")
       : "No debts.";
 
-    const prompt = `You are a warm, direct financial advisor at Fundshore. The user just completed a Financial X-Ray. Analyze their situation and give personalized advice.
+    const prompt = `You are a warm, direct financial advisor at Fundshore. Analyze this user's situation.
 
-RULES:
-- Write 6-10 sentences max. Be specific with dollar amounts and timelines.
-- Start with their biggest strength, then address the biggest risk.
-- Give 2-3 concrete action steps with exact numbers.
-- Never recommend interest-based investment products (no index funds, bonds, or anything with interest/returns). Instead suggest: building a side business, acquiring productive assets, learning high-value skills, or building equity in a venture.
-- Tone: like a smart friend who happens to be a financial expert. Not formal, not preachy.
-- End with one encouraging sentence.
-- Do NOT use markdown formatting, bullet points, or headers. Just plain conversational paragraphs.
+RULES: 6-10 sentences max. Specific dollar amounts and timelines. Start with biggest strength, then biggest risk. Give 2-3 concrete actions. Never recommend interest-based products — suggest: side business, productive assets, skills, ventures. Tone: smart friend. No markdown. Plain paragraphs.
 
-USER DATA:
-Monthly income (after tax): $${income}
-Health Score: ${score}/100
-Monthly surplus: $${Math.round(surplus)}
-Savings rate: ${savingsRate.toFixed(1)}%
-
-EXPENSES:
-${expenseLines}
-
-DEBTS:
-${debtLines}
-Total debt: $${Math.round(totalDebt)}
-Monthly interest cost: $${Math.round(totalInterest)}`;
+DATA:
+Income: $${income}/mo | Score: ${score}/100 | Surplus: $${Math.round(surplus)}/mo | Savings: ${savingsRate.toFixed(1)}%
+Expenses: ${expenseLines}
+Debts: ${debtLines} | Total: $${Math.round(totalDebt)} | Interest: $${Math.round(totalInterest)}/mo`;
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -58,33 +73,18 @@ Monthly interest cost: $${Math.round(totalInterest)}`;
     });
 
     if (!response.ok) {
-      const err = await response.text();
-      console.error("API error:", err);
-      return {
-        statusCode: 500,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "AI analysis unavailable. Please try again." })
-      };
+      return { statusCode: 500, headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: "AI analysis unavailable right now." }) };
     }
 
     const result = await response.json();
-    const text = result.content
-      .filter(item => item.type === "text")
-      .map(item => item.text)
-      .join("");
-
-    return {
-      statusCode: 200,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ analysis: text })
-    };
+    const text = result.content.filter(i => i.type === "text").map(i => i.text).join("");
+    return { statusCode: 200, headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ analysis: text }) };
 
   } catch (err) {
     console.error("Function error:", err);
-    return {
-      statusCode: 500,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "Something went wrong. Please try again." })
-    };
+    return { statusCode: 500, headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ error: "Something went wrong. Please try again." }) };
   }
 };
